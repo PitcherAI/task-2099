@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple CAPTCHA Solver</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        #captcha-container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: white;
+            text-align: center;
+        }
+
+        #captcha-image {
+            width: 200px;
+            height: 80px;
+            border: 1px solid #eee;
+            margin-bottom: 10px;
+        }
+
+        #captcha-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        #submit-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #submit-button:hover {
+            background-color: #3e8e41;
+        }
+
+        #result {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="captcha-container">
+        <h1>CAPTCHA Solver</h1>
+        <img id="captcha-image" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAAkCAIAAAD0yCsiAAAACXBIWXMAAAsTAAALEwEAmpwYAAAB1ElEQVR4nO3XQUvVUBQG4F/oUihs7G8Q2cIuCJuLgjsQ44hFExgE7E0Yg3XhGv/g5y/O5l3r/g23+d77v6jH77Kqj75233s7u+wL1+P4/W81uC0/4QO/Qd7t0O/Q+6r9Q9r228h3u5/6D4T/5v0F6m630U5p9v/304/QfK+0n7f3P073P+g5n+eP0H613L/S/8p7w293k7/sP4H6t0G6L/130Hk75h9F12801j0u+p9g8s1F1O1f4L1qN8+6D4Z1m/0/r6u/8Jt1/6g98t5j9F+18l72270H5b+l77v1x6N/t/b9f8t5L9D4r5x9H+38t+r620N9f7y30/27998H6p6k9P9P2v7/n7i05t7/j74b+10H0V2h2f0L0u0e6/9H9Z3b6H0p3D/i33P+j6m9V/077P9T039t2b9R317e/17h9R9Y3x67/V779J/D/r728b13u1g/w0W+L/s2v+U/6L33/q9977/N/f5n2P2r7s/+f/W/1/799z9P4n879T9v/r/r/r/5n6T6n05z78/w/9h4/4HAAAAAElFTkSuQmCC" alt="CAPTCHA Image">
+        <input type="text" id="captcha-input" placeholder="Enter CAPTCHA text">
+        <button id="submit-button">Submit</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const submitButton = document.getElementById('submit-button');
+        const captchaInput = document.getElementById('captcha-input');
+        const resultDiv = document.getElementById('result');
+        const captchaImage = document.getElementById('captcha-image');
+
+        submitButton.addEventListener('click', () => {
+            const userInput = captchaInput.value;
+            // Replace this with your actual CAPTCHA validation logic
+            // For demonstration purposes, we'll just check against a hardcoded value.
+            const correctCaptcha = "AMgAAAAkCAIAAAD0yCsi"; //The text from the base64 encoded image, though it is unlikely to match, so it will only be accurate once. Should regenerate new CAPTCHA to be accurate.
+
+            if (userInput === correctCaptcha) {
+                resultDiv.textContent = "CAPTCHA Solved! You are human.";
+                resultDiv.style.color = "green";
+            } else {
+                resultDiv.textContent = "CAPTCHA Failed. Try again.";
+                resultDiv.style.color = "red";
+            }
+
+            //Clear the input
+            captchaInput.value = "";
+            // Ideally you would refresh the captcha here too.
+        });
+    </script>
+</body>
+</html>
